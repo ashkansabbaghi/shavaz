@@ -1,6 +1,6 @@
 <template>
-  <v-responsive class="border rounded" max-height="300">
-    <v-app :theme="theme">
+  <v-responsive class="" max-height="300">
+    <v-app >
       <Header />
 
       <!-- content -->
