@@ -2,7 +2,7 @@
 
 <template>
   <v-container>
-    <h1>Main Content</h1>
+    <product-slider />
   </v-container>
 </template>
 

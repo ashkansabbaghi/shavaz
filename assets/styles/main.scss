@@ -1,7 +1,11 @@
-$bg-main: #FAFAFA;
-
+$bg-main: #fafafa;
 
 .bg-main {
-    background-color: $bg-main
-    
+  background-color: $bg-main;
+}
+
+.v-slide-group,
+.v-container,
+.v-sheet {
+  box-shadow: none !important;
 }

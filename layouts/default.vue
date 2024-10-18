@@ -1,6 +1,6 @@
 <template>
-  <v-responsive class="" max-height="300">
     <v-app >
+      <!-- header -->
       <Header />
 
       <!-- content -->
@@ -8,7 +8,7 @@
         <slot />
       </v-main>
 
-
+      <!-- footer -->
+       <Footer />
     </v-app>
-  </v-responsive>
 </template>

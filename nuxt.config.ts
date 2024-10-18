@@ -3,8 +3,8 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
   css: [
-    '@/assets/styles/main.scss', // Add your main SCSS file here
     'vuetify/lib/styles/main.sass', // Vuetify's styles
+    '@/assets/styles/main.scss', // Add your main SCSS file here
   ],
   build: {
     transpile: ['vuetify'],
