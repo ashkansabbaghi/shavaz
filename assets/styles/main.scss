@@ -1,7 +1,11 @@
+@import "./font.scss"; // import font iranstans
 $bg-main: #fafafa;
-$color-primary: #1F74C9;
-$color-secondary: #D72585;
+$color-primary: #1f74c9;
+$color-secondary: #d72585;
 
+body {
+  font-family: "IRANSansXFaNum", sans-serif;
+}
 
 .bg-main {
   background-color: $bg-main;
