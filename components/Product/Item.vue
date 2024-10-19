@@ -81,7 +81,7 @@
 
 
 <script lang="ts" setup>
-const leading = ref(false)
+const loading = ref(false)
 const selection = ref(1)
 
 

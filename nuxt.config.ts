@@ -14,7 +14,8 @@ export default defineNuxtConfig({
       'process.env.DEBUG': false,
     },
   },
-  modules: [
-
-  ],
+  modules: ['@nuxt/image'],
+  image: {
+    inject: true // Enable image injection for all components
+  },
 })
