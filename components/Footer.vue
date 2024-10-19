@@ -1,8 +1,22 @@
 <template>
-  <v-footer app color="primary" dark>
-    <v-col class="text-center white--text">
-      © {{ new Date().getFullYear() }} - My Landing Page
-    </v-col>
+  <v-footer
+    class="bg-indigo-lighten-1 text-center d-flex flex-column"
+  >
+    <div>
+      <v-btn
+        v-for="icon in icons"
+        :key="icon"
+        :icon="icon"
+        class="mx-4"
+        variant="text"
+      ></v-btn>
+    </div>
+
+    <v-divider></v-divider>
+
+    <div>
+      {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
+    </div>
   </v-footer>
 </template>
 

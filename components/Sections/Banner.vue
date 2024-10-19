@@ -4,21 +4,45 @@
   <section class="banner">
     <!-- bg banner -->
     <NuxtImg
-      class="banner__img"
+      class="banner__bg"
       src="/images/bg-banner.jpg"
       alt="banner-shavaz"
       loading="lazy"
+      height="460"
     />
+
     <!-- content banner -->
     <div class="banner__content">
       <!-- section img 1 -->
       <div class="banner__content-section banner__content-section--image">
-        image 1
+        <NuxtImg
+          src="/images/product-usr-banner.png"
+          alt="banner-shavaz"
+          loading="lazy"
+          width="477"
+          height="510"
+        />
       </div>
 
       <!-- section img 1 -->
-      <div class="banner__content-section banner__content-section--image">
-        image 2
+      <div class="banner__content-section banner__content-section--center">
+        <NuxtImg
+          src="/images/product-banner.png"
+          alt="banner-shavaz"
+          loading="lazy"
+          width="126"
+        />
+        <v-btn
+          class="banner__content__more"
+          color="primary"
+          variant="text"
+          flat
+        >
+          <template v-slot:prepend>
+            <IconArrowDown />
+          </template>
+          مشاهده بیشتر
+        </v-btn>
       </div>
 
       <!-- Main information section -->
@@ -44,10 +68,9 @@
   position: relative;
   width: 100% !important;
   height: 460px;
-  overflow: hidden;
-  &__img {
+  overflow: visible;
+  &__bg {
     width: 100%;
-    object-fit: cover;
   }
   &__content {
     position: absolute;
@@ -57,29 +80,43 @@
     height: 100%;
     //
     display: flex;
-    column-gap: 10px;
+    justify-content: space-between;
+    padding-right: 64px;
+    column-gap: 130px;
     justify-items: stretch;
-    align-items: stretch;
+    align-items: flex-end;
 
     &-section {
       width: 100%;
       height: 100%;
       padding: 10px;
-      width: 300px;
       text-align: start;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      row-gap: 12px;
 
       &--image {
-        background-color: #f0f0f0;
+        width: 100%;
+        height: fit-content;
+      }
+
+      &--center {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
       }
     }
     &__title {
       // icon
-      min-width: 140px;
+      min-width: 100%;
       height: auto;
     }
 
     &__tagline {
-      font-family: IRANSansXFaNum;
       font-size: 20px;
       font-weight: 700;
       line-height: 40px;
@@ -87,11 +124,17 @@
     }
 
     &__description {
-      font-family: IRANSansXFaNum;
       font-size: 20px;
       font-weight: 300;
       line-height: 40px;
-      text-align: justified;
+      text-align: justify;
+    }
+
+    &__more {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 24px;
+      text-align: center;
     }
   }
 }
