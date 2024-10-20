@@ -1,88 +1,106 @@
-<script lang="ts" setup>
-const selection = ref(1)
-const loading = ref(false)
+
+<script setup>
 
 </script>
 
 <template>
-  <v-card
-    :disabled="loading"
-    :loading="loading"
-    class="mx-auto my-12"
-    max-width="374"
-  >
-    <template v-slot:loader="{ isActive }">
-      <v-progress-linear
-        :active="isActive"
-        color="deep-purple"
-        height="4"
-        indeterminate
-      ></v-progress-linear>
-    </template>
+  <v-card class="product">
+    <!-- Discount Badge -->
+    <div class="product--discount">٪۲۴</div>
+    
+    <!-- Product Image -->
+    <NuxtImg
+      class="product__image"
+      src="/images/product-banner-1.png"
+      alt="Product Image"
+    />
 
-    <v-img
-      height="250"
-      src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
-      cover
-    ></v-img>
-
-    <v-card-item>
-      <v-card-title>Cafe Badilico</v-card-title>
-
-      <v-card-subtitle>
-        <span class="me-1">Local Favorite</span>
-
-        <v-icon
-          color="error"
-          icon="mdi-fire-circle"
-          size="small"
-        ></v-icon>
-      </v-card-subtitle>
-    </v-card-item>
-
+    <!-- Product Info -->
     <v-card-text>
-      <v-row
-        align="center"
-        class="mx-0"
-      >
-        <v-rating
-          :model-value="4.5"
-          color="amber"
-          density="compact"
-          size="small"
-          half-increments
-          readonly
-        ></v-rating>
+      <h3 class="product__title">
+        کرم ضد آفتاب رومینا مدل Rose Beige-۲۵
+      </h3>
+      <p class="product--size">حجم ۵۰ میلی لیتر</p>
 
-        <div class="text-grey ms-4">
-          4.5 (413)
-        </div>
-      </v-row>
-
-      <div class="my-4 text-subtitle-1">
-        $ • Italian, Cafe
+      <!-- Price -->
+      <div class="product__price">
+        <p class="product__price--new">۱۴۵,۰۰۰ تومان</p>
+        <p class="product__price--old">۱۸۴,۰۳۰ تومان</p>
       </div>
-
-      <div>Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.</div>
     </v-card-text>
 
-    <v-divider class="mx-4 mb-1"></v-divider>
-
-    <v-card-title>Tonight's availability</v-card-title>
-
-    <div class="px-4 mb-2">
-      <v-chip-group v-model="selection" selected-class="bg-deep-purple-lighten-2">
-        <v-chip>5:30PM</v-chip>
-
-        <v-chip>7:30PM</v-chip>
-
-        <v-chip>8:00PM</v-chip>
-
-        <v-chip>9:00PM</v-chip>
-      </v-chip-group>
-    </div>
+    <!-- Buy Button -->
+    <v-card-actions>
+      <v-btn class="buy-button" block color="primary">خرید</v-btn>
+    </v-card-actions>
   </v-card>
-</template> 
+</template>
 
 
+<style lang="scss" scoped>
+.product {
+  max-width: 350px;
+  position: relative;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 
+  &--discount {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #ff3d85;
+    color: white;
+    padding: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    clip-path: polygon(100% 0, 100% 100%, 0 100%);
+  }
+
+  &__image {
+    height: 200px;
+    object-fit: contain;
+  }
+
+  &__title {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 5px;
+  }
+
+  &--size {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 15px;
+  }
+
+  &__price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+
+    &--new {
+      font-size: 18px;
+      font-weight: bold;
+      color: #ff3d85;
+    }
+
+    &--old {
+      font-size: 14px;
+      color: #999;
+      text-decoration: line-through;
+    }
+  }
+
+  .buy-button {
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #ff3d85;
+    &:hover {
+      background-color: #ff216b;
+    }
+  }
+}
+</style>

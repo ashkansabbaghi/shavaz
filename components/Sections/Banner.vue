@@ -126,7 +126,7 @@ onMounted(() => {
     &-section {
       width: 100%;
       height: 100%;
-      padding: 10px;
+      padding: 16px;
       text-align: start;
       display: flex;
       flex-direction: column;

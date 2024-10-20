@@ -16,10 +16,8 @@
   box-shadow: none !important;
 }
 .header {
-  /* height: 96px !important; */
   padding: 30px 36px;
   height: 96px;
-  /* box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1) !important; */
   background-color: bg-main;
 
   .header__logo {
