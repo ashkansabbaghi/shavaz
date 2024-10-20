@@ -14,6 +14,9 @@ onMounted(() => {
     currentImage.value = images[currentIndex.value];
   }, 2500);
 });
+
+const scrollToProductSlider = inject<() => void>('scrollToProductSlider'); // provide to index.vue
+
 </script>
 
 <template>
@@ -66,6 +69,7 @@ onMounted(() => {
           color="primary"
           variant="text"
           flat
+          @click.prevent="scrollToProductSlider"
         >
           <template v-slot:prepend>
             <IconArrowDown />

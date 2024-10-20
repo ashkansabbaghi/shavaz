@@ -1,7 +1,7 @@
 <script lang="ts" setup></script>
 
 <template>
-  <v-sheet dir="rtl" class="info" elevation="8">
+  <v-sheet dir="rtl" class="info" elevation="0">
     <v-card class="info__card" elevation="0">
       <v-card-title class="info__card--title text__primary">
         این پاییز، تو شاواز بریز و بپاشه...!

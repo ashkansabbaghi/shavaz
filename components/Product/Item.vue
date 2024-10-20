@@ -43,7 +43,7 @@ const props = defineProps({
 
 <style lang="scss" scoped>
 .product {
-  width: 360px;
+  width: 370px;
   height: auto;
   border-radius: 2px;
   text-align: center;

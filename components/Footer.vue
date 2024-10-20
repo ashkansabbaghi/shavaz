@@ -1,18 +1,16 @@
 <template>
   <v-footer
-    class="bg-indigo-lighten-1 text-center d-flex flex-column"
+  dir="rtl"
+  color="#D72685"
+  height="56"
+  width="100%"
+    class="justify-center"
   >
-  
-    <v-divider></v-divider>
-
-    <div>
-      {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
-    </div>
+  <!-- <p class="w-full text-center"> -->
+    کلیه حقوق این سایت متعلق به شاواز می باشد.
+  <!-- </p> -->
   </v-footer>
 </template>
-
-<script setup>
-</script>
 
 <style scoped lang="scss">
 </style>

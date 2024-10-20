@@ -9,6 +9,6 @@
       </v-main>
 
       <!-- footer -->
-       <Footer />
+       <Footer class="mt-16" />
     </v-app>
 </template>
