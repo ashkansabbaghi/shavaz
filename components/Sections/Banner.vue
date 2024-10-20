@@ -1,4 +1,20 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const images = [
+  "images/product-banner-1.png",
+  "images/product-banner-2.png",
+  "images/product-banner-3.png",
+];
+
+const currentIndex = ref(0);
+const currentImage = ref(images[currentIndex.value]);
+
+onMounted(() => {
+  setInterval(() => {
+    currentIndex.value = (currentIndex.value + 1) % images.length;
+    currentImage.value = images[currentIndex.value];
+  }, 2000);
+});
+</script>
 
 <template>
   <section class="banner">
@@ -15,6 +31,7 @@
     <div class="banner__content">
       <!-- section img 1 -->
       <div class="banner__content-section banner__content-section--image">
+        <!-- background -->
         <NuxtImg
           src="/images/product-usr-banner.png"
           alt="banner-shavaz"
@@ -25,13 +42,20 @@
       </div>
 
       <!-- section img 1 -->
-      <div class="banner__content-section banner__content-section--center">
-        <NuxtImg
-          src="/images/product-banner.png"
-          alt="banner-shavaz"
-          loading="lazy"
-          width="126"
-        />
+      <div
+        class="banner__content-section banner__content-section--center position-relative"
+      >
+        <!-- image change  -->
+        <transition name="fade" mode="out-in">
+          <NuxtImg
+            :src="currentImage"
+            :key="currentImage"
+            alt="banner-shavaz"
+            loading="lazy"
+            height="274"
+            class="banner__content__image"
+          />
+        </transition>
         <v-btn
           class="banner__content__more"
           color="primary"
@@ -86,6 +110,11 @@
     justify-items: stretch;
     align-items: flex-end;
 
+    &__image {
+      display: block;
+      // position: absolute;
+    }
+
     &-section {
       width: 100%;
       height: 100%;
@@ -138,4 +167,23 @@
     }
   }
 }
+// responsive mobile 768px
+// @media (max-width: 768px) {
+//   .banner {
+//     // height: 100%;
+//     &__content {
+
+//       padding: 0;
+//       row-gap: 12px;
+//       &-section {
+//         &--center {
+//           padding: 0 12px;
+//         }
+//       }
+//     }
+//   }
+// }
+
+// fade design
+
 </style>

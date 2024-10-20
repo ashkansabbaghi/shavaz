@@ -1,7 +1,9 @@
-@import "font.scss"; // import font iranstans
+@use "font" as *; 
+
 $bg-main: #fafafa;
 $color-primary: #1f74c9;
 $color-secondary: #d72585;
+$text-primary: #3C3C3C;
 
 body {
   font-family: "IRANSansXFaNum", sans-serif;
@@ -15,4 +17,26 @@ body {
 .v-container,
 .v-sheet {
   box-shadow: none !important;
+}
+
+.btn-secondary {
+  background-color: $color-secondary;
+  line-height: 24px;
+  text-align: center;
+  padding: 12px 40px;
+  color: #fafafa;
+  border-radius: 4px;
+}
+
+.btn-primary {
+  background-color: $color-primary;
+  line-height: 24px;
+  text-align: center;
+  padding: 12px 40px;
+  color: $text-primary;
+  border-radius: 4px;
+}
+
+.text__primary {
+  color: $text-primary;
 }

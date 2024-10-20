@@ -1,3 +1,8 @@
+<script lang="ts" setup>
+const selection = ref(1)
+
+
+</script>
 
 <template>
   <v-card
@@ -80,10 +85,4 @@
 </template> 
 
 
-<script lang="ts" setup>
-const loading = ref(false)
-const selection = ref(1)
 
-
-
-</script>
