@@ -12,7 +12,7 @@ onMounted(() => {
   setInterval(() => {
     currentIndex.value = (currentIndex.value + 1) % images.length;
     currentImage.value = images[currentIndex.value];
-  }, 2000);
+  }, 2500);
 });
 </script>
 
@@ -30,7 +30,9 @@ onMounted(() => {
     <!-- content banner -->
     <div class="banner__content">
       <!-- section img 1 -->
-      <div class="banner__content-section banner__content-section--image">
+      <div
+        class="banner__content-section banner__content-section--image align-start"
+      >
         <!-- background -->
         <NuxtImg
           src="/images/product-usr-banner.png"
@@ -46,16 +48,19 @@ onMounted(() => {
         class="banner__content-section banner__content-section--center position-relative"
       >
         <!-- image change  -->
-        <transition name="fade" mode="out-in">
-          <NuxtImg
-            :src="currentImage"
-            :key="currentImage"
-            alt="banner-shavaz"
-            loading="lazy"
-            height="274"
-            class="banner__content__image"
-          />
-        </transition>
+        <v-sheet height="274" width="130" class="bg-transparent">
+          <transition>
+            <NuxtImg
+              :src="currentImage"
+              :key="currentImage"
+              alt="banner-shavaz"
+              loading="lazy"
+              height="274"
+              class="banner__content__image"
+            />
+          </transition>
+        </v-sheet>
+
         <v-btn
           class="banner__content__more"
           color="primary"
@@ -112,7 +117,10 @@ onMounted(() => {
 
     &__image {
       display: block;
-      // position: absolute;
+      position: absolute;
+      // top: 50%;
+      left: 50%;
+      transform: translate(-50%);
     }
 
     &-section {
@@ -129,6 +137,8 @@ onMounted(() => {
       &--image {
         width: 100%;
         height: fit-content;
+        padding: 0;
+        // align-items: end;
       }
 
       &--center {
@@ -185,5 +195,13 @@ onMounted(() => {
 // }
 
 // fade design
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
 
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
 </style>

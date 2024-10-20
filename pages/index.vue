@@ -6,6 +6,6 @@
   <sections-banner />
   <v-container>
     <sections-gift-card />
-    <product-slider />
+    <!-- <product-slider /> -->
   </v-container>
 </template>

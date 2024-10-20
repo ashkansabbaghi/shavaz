@@ -21,7 +21,7 @@
 <style lang="scss">
 .gift-card {
   margin: auto;
-  margin-top: -50px;
+  margin-top: -60px;
   width: Fixed (1, 344px) px;
   padding: 25px 23px;
   gap: var(--Zero);
