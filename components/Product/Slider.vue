@@ -3,12 +3,12 @@
 
 const model = ref(null);
 const products = [
-  { name: 'Product 1', image: 'https://via.placeholder.com/300x200' },
-  { name: 'Product 2', image: 'https://via.placeholder.com/300x200' },
-  { name: 'Product 3', image: 'https://via.placeholder.com/300x200' },
-  { name: 'Product 3', image: 'https://via.placeholder.com/300x200' },
-  { name: 'Product 3', image: 'https://via.placeholder.com/300x200' },
-  { name: 'Product 3', image: 'https://via.placeholder.com/300x200' },
+  { name: 'Product 1', image: '/images/product-card-1.jpg' },
+  { name: 'Product 2', image: '/images/product-card-2.jpg' },
+  { name: 'Product 3', image: '/images/product-card-3.jpg' },
+  { name: 'Product 3', image: '/images/product-card-1.jpg' },
+  { name: 'Product 3', image: '/images/product-card-2.jpg' },
+  { name: 'Product 3', image: '/images/product-card-3.jpg' },
 ];
 
 </script>

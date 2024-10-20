@@ -7,6 +7,7 @@
   <v-container>
     <sections-gift-card />
     <sections-info />
-    <product-slider />
   </v-container>
+  
+  <product-slider />
 </template>

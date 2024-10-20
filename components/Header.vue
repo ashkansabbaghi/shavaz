@@ -18,7 +18,7 @@
 .header {
   padding: 30px 36px;
   height: 96px;
-  background-color: bg-main;
+  background-color: transparent;
 
   .header__logo {
     width: 100px;
