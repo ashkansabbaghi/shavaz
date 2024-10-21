@@ -8,6 +8,9 @@ $text-primary: #3C3C3C;
 body {
   font-family: "IRANSansXFaNum", sans-serif;
 }
+h1,h2,h3,h4,h5,h6,p,a,span,label {
+ color: $text-primary ;
+}
 
 .bg-main {
   background-color: $bg-main;
@@ -39,4 +42,17 @@ body {
 
 .text__primary {
   color: $text-primary;
+}
+
+.v-field {
+  direction: rtl;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.align-items-center{
+  display: flex;
+  align-items: center;
 }

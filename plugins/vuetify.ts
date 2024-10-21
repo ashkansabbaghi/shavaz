@@ -9,6 +9,10 @@ export default defineNuxtPlugin((nuxtApp) => {
         ssr: true,
         components,
         directives,
+        locale: {
+            locale: 'fa',
+            rtl: {fa: true},
+          },
     })
     nuxtApp.vueApp.use(vuetify)
 })

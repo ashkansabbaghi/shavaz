@@ -1,7 +1,9 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const isOpenModal = ref(false);
+</script>
 
 <template>
-  <v-card class="gift-card">
+  <v-card  class="gift-card">
     <v-card-title class="gift-card__title text__primary">
       هدیه رومینا برای تو که دوست شاوازی
       <v-spacer></v-spacer>
@@ -13,15 +15,26 @@
     </v-card-text>
 
     <v-card-actions class="gift-card__actions">
-      <button class="gift-card__actions__btn btn-secondary">دریافت هدیه</button>
+      <button
+        @click.prevent="isOpenModal = true"
+        class="gift-card__actions__btn btn-secondary"
+      >
+        دریافت هدیه
+      </button>
     </v-card-actions>
   </v-card>
+
+  <teleport to="body">
+    <lazy-client-only>
+      <modal-main v-model:is-open="isOpenModal" />
+    </lazy-client-only>
+  </teleport>
 </template>
 
 <style lang="scss">
 .gift-card {
   margin: auto;
-  margin-top: -60px;
+  margin-top: -45px;
   width: Fixed (1, 344px) px;
   padding: 25px 23px;
   gap: var(--Zero);

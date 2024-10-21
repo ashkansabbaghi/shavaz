@@ -17,12 +17,17 @@ const props = defineProps({
 <template>
   <v-card class="product">
     <!-- Discount Badge -->
-    <div class="product__discount">
-      <p class="product__discount--text">{{ product.discount }}</p>
+    <div v-if="product?.discount" class="product__discount">
+      <p class="product__discount--text">{{ product?.discount }}</p>
     </div>
 
     <!-- Product Image -->
-    <NuxtImg class="product__image" :src="product.image" :alt="product.name" />
+    <NuxtImg
+      class="product__image"
+      :src="product.image"
+      placeholder="/images/product-not-show.png"
+      :alt="product.name"
+    />
 
     <!-- Product Info -->
     <v-card-text class="pa-6">
@@ -30,11 +35,11 @@ const props = defineProps({
 
       <!-- Price -->
       <div class="d-flex justify-center mt-4">
-        <IconToman />
         <div class="product__price">
           <p class="product__price--new" v-text="product.price"></p>
-          <p class="product__price--old" v-text="product.price_old"></p>
+          <p class="product__price--old" >{{ product.price_old }}</p>
         </div>
+        <IconToman class="product__price--icon" />
       </div>
       <v-btn class="buy-button" block variant="outlined">خرید</v-btn>
     </v-card-text>
@@ -96,6 +101,10 @@ const props = defineProps({
     align-items: center;
     margin-bottom: 15px;
 
+    &--icon {
+      margin-right: 2px;
+    }
+
     &--new {
       font-size: 18px;
       font-weight: bold;
@@ -103,6 +112,7 @@ const props = defineProps({
     }
 
     &--old {
+      height: 20px;
       font-size: 14px;
       color: #999;
       text-decoration: line-through;

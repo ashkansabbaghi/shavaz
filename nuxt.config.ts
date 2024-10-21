@@ -7,7 +7,7 @@ export default defineNuxtConfig({
     '@/assets/styles/main.scss', // Add your main SCSS file here
   ],
   build: {
-    transpile: ['vuetify'],
+    transpile: ['vuetify' , ],
   },
   vite: {
     define: {

@@ -1,7 +1,7 @@
 <script lang="ts" setup></script>
 
 <template>
-  <v-sheet dir="rtl" class="info" elevation="0">
+  <v-sheet class="info" elevation="0">
     <v-card class="info__card" elevation="0">
       <v-card-title class="info__card--title text__primary">
         این پاییز، تو شاواز بریز و بپاشه...!
@@ -34,7 +34,6 @@
         src="/images/shopping-cart.png"
         alt="info-card-shopping-cart"
       />
-    
     </div>
   </v-sheet>
 </template>
@@ -45,20 +44,24 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 64px 0;
+
+  &__card {
+    padding: 64px 0;
+
+  }
 
   &__container-image {
     position: relative;
-    width: 300px;
+    width: 287px;
     height: 320px;
     margin-left: 90px;
 
     &:hover {
       .info__container-image--product-left {
-        transform: translateX(22px) translateY(100px) rotate(-15deg);
+        transform: translateX(22px) translateY(80px) rotate(-15deg);
       }
       .info__container-image--product-right {
-        transform: translateX(-25px) translateY(71px) rotate(15deg)
+        transform: translateX(-25px) translateY(61px) rotate(15deg);
       }
     }
 
@@ -70,17 +73,17 @@
     }
 
     &--cart {
-      top: 0;
+      bottom: 0;
       left: 0;
       width: 100%;
-      height: 100%;
+      // height: 100%;
       object-fit: contain;
     }
 
     &--product-left {
       width: 44px;
       height: 126px;
-      top: -50.89px;
+      top: 15.89px;
       left: 107px;
       transform: rotate(-45deg);
     }
@@ -88,7 +91,7 @@
     &--product-right {
       width: 46px;
       height: 97px;
-      top: 5.11px;
+      top: 65.11px;
       left: 210px;
       transform: rotate(30deg);
     }
