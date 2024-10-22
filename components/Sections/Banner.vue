@@ -75,10 +75,10 @@ const scrollToProductSlider = inject<() => void>("scrollToProductSlider"); // pr
           flat
           @click.prevent="scrollToProductSlider"
         >
-          <template v-slot:prepend>
+        مشاهده بیشتر
+          <template v-slot:append>
             <IconArrowDown />
           </template>
-          مشاهده بیشتر
         </v-btn>
       </v-sheet>
 

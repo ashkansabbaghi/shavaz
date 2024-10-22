@@ -4,10 +4,12 @@ $bg-main: #fafafa;
 $color-primary: #1f74c9;
 $color-secondary: #d72585;
 $text-primary: #3c3c3c;
-$text-gray: #6A6A6A;
+$text-gray: #6a6a6a;
 
-body {
-  font-family: "IRANSansXFaNum", sans-serif;
+body,
+button,
+.v-btn {
+  font-family: "IRANSansXFaNum", sans-serif !important;
 }
 h1,
 h2,
@@ -56,7 +58,11 @@ label {
   color: $text-primary;
 }
 
-.text__gray{
+.text__secondary {
+  color: $color-secondary;
+}
+
+.text__gray {
   color: $text-gray;
 }
 
@@ -75,4 +81,27 @@ label {
 
 .v-otp-input__content {
   padding: 0 !important;
+}
+
+.font-bold {
+  font-weight: 600;
+}
+
+.custom-input {
+  width: 100%;  
+  
+  .v-field{
+    border-radius: 8px !important;
+    height: 42px !important;
+  
+    .v-field__field{
+      height: 42px !important;
+    }
+  }
+
+  .v-input__details{
+    padding-bottom: 4px;
+  }
+
+  
 }

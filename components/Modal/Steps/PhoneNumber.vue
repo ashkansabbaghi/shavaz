@@ -6,8 +6,12 @@ const validPhone = ref(false);
 
 const rulesPhoneNumber = {
   required: (value: string) => !!value || `  شماره موبایل الزامی است`,
-  counter: (value: string) => value.length <= 11 || "شماره موبایل نادرست است",
-};
+  counter:  (value:string) => {
+    const phoneRegex = /^09\d{9}$/
+    if (phoneRegex.test(value)) return true
+    return 'شماره موبایل نادرست است.'
+  }
+}
 
 const submit = () => {
   console.log("submit");
@@ -31,6 +35,7 @@ const submit = () => {
           label="شماره موبایل"
           class="steps__one--input"
           height="42"
+          autofocus
         >
         </v-text-field>
       </div>
@@ -50,7 +55,8 @@ const submit = () => {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    gap: 32px;
+    gap: 40px;
+    padding: 48px 0;
   }
   &--title {
     font-size: 16px;

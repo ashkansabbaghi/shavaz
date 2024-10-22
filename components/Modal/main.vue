@@ -11,10 +11,10 @@ const newAddress = ref("");
 const addresses = ref(["آدرس ۱", "آدرس ۲", "آدرس ۳"]); // get object
 const isLoading = ref(false);
 
-const nextStep = () => {
-  if (step.value < 6) {
-    step.value++;
-  }
+const nextStep = (numStep?: number) => {
+  if (numStep) {
+    step.value = numStep;
+  } else step.value < 6 && step.value++;
 };
 
 const goToNewAddress = () => {
@@ -38,9 +38,15 @@ type NameSteps = {
   phoneNumber: string;
   orderNotPlaced: string;
   otpCode: string;
+  selectAddress: string;
+  newAddress: string;
+  accepted: string;
+  finished: string;
 };
 const controllerFunc = (nameStep: keyof NameSteps) => {
   // send data phone to backend
+  console.log(nameStep);
+
   if (nameStep === "phoneNumber" && phoneNumber.value) {
     console.log(nameStep, phoneNumber.value);
     nextStep();
@@ -50,6 +56,18 @@ const controllerFunc = (nameStep: keyof NameSteps) => {
   } else if (nameStep === "otpCode" && otpCode.value) {
     console.log(nameStep, otpCode.value);
     nextStep();
+  } else if (nameStep === "selectAddress" && selectedAddress.value) {
+    console.log(nameStep, selectedAddress.value);
+    nextStep();
+  } else if (nameStep === "newAddress") {
+    console.log(nameStep, newAddress.value);
+    nextStep(5);
+  } else if (nameStep === "accepted") {
+    console.log(nameStep);
+    nextStep(6);
+  } else if (nameStep === "finished") {
+    console.log(nameStep);
+    closeModal();
   }
 };
 </script>
@@ -66,6 +84,7 @@ const controllerFunc = (nameStep: keyof NameSteps) => {
       <!-- header card -->
       <template v-slot:title>
         <div class="d-flex justify-space-between modal__header">
+          <h4 class="modal__header__title">دریافت هدیه</h4>
           <v-btn
             density="compact"
             icon="mdi-window-close"
@@ -74,7 +93,6 @@ const controllerFunc = (nameStep: keyof NameSteps) => {
             height="24"
             @click.prevent="closeModal"
           ></v-btn>
-          <h4 class="modal__header__title">دریافت هدیه</h4>
         </div>
       </template>
 
@@ -97,29 +115,25 @@ const controllerFunc = (nameStep: keyof NameSteps) => {
 
         <!-- OTPCode.vue -->
         <template v-else-if="step === 3">
-          <modal-steps-otp-code v-model:otp-code="otpCode" @submit="controllerFunc('otpCode')" />
+          <modal-steps-otp-code
+            v-model:otp-code="otpCode"
+            @submit="controllerFunc('otpCode')"
+          />
         </template>
 
-        <div v-else-if="step === 4">
-          <!-- Step 4: انتخاب آدرس -->
-          <p>انتخاب آدرس:</p>
-          <v-select
-            v-model="selectedAddress"
-            :items="addresses"
-            label="انتخاب آدرس"
-          ></v-select>
-          <v-btn @click="nextStep()">ادامه</v-btn>
-          <v-btn @click="goToNewAddress()">اضافه کردن آدرس جدید</v-btn>
-        </div>
-        <div v-else-if="step === 5">
-          <!-- Step 5: ثبت آدرس جدید -->
-          <v-text-field v-model="newAddress" label="آدرس جدید"></v-text-field>
-          <v-btn @click="nextStep()">ادامه</v-btn>
-        </div>
-        <div v-else-if="step === 6">
-          <!-- Step 6: ثبت هدیه -->
-          <p>ثبت سفارش و دریافت هدیه شما انجام شد!</p>
-        </div>
+        <template v-else-if="step === 4">
+          <modal-steps-address-selection @submit="controllerFunc" />
+        </template>
+
+        <template v-else-if="step === 5">
+          <modal-steps-new-address @submit="controllerFunc" />
+
+        </template>
+        <template v-else-if="step === 6">
+          <modal-steps-order-accepted
+            @submit="controllerFunc('finished')"
+          />
+        </template>
       </div>
 
       <!-- end content -->

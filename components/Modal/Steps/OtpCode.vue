@@ -12,7 +12,7 @@ const submit = () => {
 
 const getOTPCode = () => {
   console.log("getOTPCode");
-  otpCode.value = ""
+  otpCode.value = "";
 };
 </script>
 
@@ -41,7 +41,7 @@ const getOTPCode = () => {
 
         <button
           v-if="validOTPCode"
-          class="steps__three--description"
+          class="steps__three--description--active"
           variant="text"
           :disabled="!validOTPCode"
           type="button"
@@ -51,7 +51,7 @@ const getOTPCode = () => {
         </button>
         <button
           v-else
-          class="steps__three--description"
+          class="steps__three--description "
           variant="text"
           type="button"
           :disabled="validOTPCode"
@@ -60,7 +60,7 @@ const getOTPCode = () => {
         </button>
       </div>
 
-      <NuxtImg src="/images/phone.svg" class="steps__three--icon" />
+      <NuxtImg src="/images/otp.svg" class="steps__three--icon" />
     </div>
 
     <button class="btn-secondary w-full" type="submit">ارسال</button>
@@ -68,6 +68,8 @@ const getOTPCode = () => {
 </template>
 
 <style lang="scss">
+@use "~/assets/styles/main.scss" as *; // Import with wildcard to avoid prefixing
+
 .steps__three {
   &--container {
     width: 100%;
@@ -75,7 +77,8 @@ const getOTPCode = () => {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    gap: 32px;
+    gap: 40px;
+    padding: 48px 0;
   }
   &--title {
     font-size: 16px;
@@ -89,15 +92,22 @@ const getOTPCode = () => {
   }
   &--input {
     width: 100%;
-    border-radius: 8px;
     justify-content: start;
     padding: 0;
 
+    .v-field {
+        color: $text-primary;
+        border-radius: 8px;
+
+        border: 1px solid $text-primary;
+      }
     &.error {
       .v-field--error {
-        background-color: #d8384d4d;
+        color: $color-secondary;
         border-radius: 8px;
-        border: 1px solid #d8384d;
+
+        background-color: #d8384d4d;
+        border: 1px solid $color-secondary;
       }
     }
   }
@@ -105,6 +115,12 @@ const getOTPCode = () => {
     font-family: IRANSansXFaNum;
     font-size: 12px;
     font-weight: 500;
+
+    &--active {
+      font-size: 12px;
+      font-weight: 700;
+      color: $color-secondary;
+    }
   }
 }
 </style>
