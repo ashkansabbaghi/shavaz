@@ -7,10 +7,6 @@ const selectedAddress = ref(null);
 const newAddress = ref("");
 
 //rules
-const rulesPhoneNumber = {
-  required: (value: string) => !!value || "شماره موبایل الزامی است",
-  counter: (value: string) => value.length <= 11 || "شماره موبایل نادرست است",
-};
 
 const addresses = ref(["آدرس ۱", "آدرس ۲", "آدرس ۳"]); // get object
 const isLoading = ref(false);
@@ -36,6 +32,25 @@ const resetModal = () => {
 const closeModal = () => {
   isOpen.value = false;
   resetModal();
+};
+
+type NameSteps = {
+  phoneNumber: string;
+  orderNotPlaced: string;
+  otpCode: string;
+};
+const controllerFunc = (nameStep: keyof NameSteps) => {
+  // send data phone to backend
+  if (nameStep === "phoneNumber" && phoneNumber.value) {
+    console.log(nameStep, phoneNumber.value);
+    nextStep();
+  } else if (nameStep === "orderNotPlaced") {
+    console.log(nameStep);
+    nextStep();
+  } else if (nameStep === "otpCode" && otpCode.value) {
+    console.log(nameStep, otpCode.value);
+    nextStep();
+  }
 };
 </script>
 
@@ -65,49 +80,26 @@ const closeModal = () => {
 
       <!-- steps -->
       <div class="modal__steps">
-        <!-- step 1 : give phone number -->
-        <div v-if="step === 1">
-          <div class="d-flex justify-space-between align-items-center">
-            <div class="modal__steps__one--container">
-              <p class="modal__steps__one--title">
-                شماره موبایلت رو اینجا وارد کن
-              </p>
-              <v-text-field
-                :rules="[rulesPhoneNumber.required, rulesPhoneNumber.counter]"
-                variant="outlined"
-                v-model="phoneNumber"
-                label="شماره موبایل"
-                class="modal__steps__input"
-                height="42"
-                :hint="
-                  phoneNumber.length > 11 ? 'شماره موبایل باید 11 رقم باشد' : ''
-                "
-              >
-                <template #details>
-                  <v-spacer />
+        <!-- PhoneNumber.vue -->
+        <template v-if="step === 1">
+          <modal-steps-phone-number
+            v-model:phone-number="phoneNumber"
+            @submit="controllerFunc('phoneNumber')"
+          />
+        </template>
 
-                  See our <a href="#">Terms and Service</a>
-                </template>
-              </v-text-field>
-            </div>
+        <!-- OrderNotPlaced.vue -->
+        <template v-else-if="step === 2">
+          <modal-steps-order-not-placed
+            @submit="controllerFunc('orderNotPlaced')"
+          />
+        </template>
 
-            <NuxtImg src="/images/phone.svg" class="modal__steps__one--icon" />
-          </div>
+        <!-- OTPCode.vue -->
+        <template v-else-if="step === 3">
+          <modal-steps-otp-code v-model:otp-code="otpCode" @submit="controllerFunc('otpCode')" />
+        </template>
 
-          <button class="btn-secondary w-full" @click="nextStep()">
-            ادامه
-          </button>
-        </div>
-        <div v-else-if="step === 2">
-          <!-- Step 2: سفارش ثبت نشده -->
-          <p>شما سفارشی ثبت نکردید.</p>
-          <v-btn @click="nextStep()">ثبت سفارش</v-btn>
-        </div>
-        <div v-else-if="step === 3">
-          <!-- Step 3: کد OTP -->
-          <v-text-field v-model="otpCode" label="کد OTP"></v-text-field>
-          <v-btn @click="nextStep()">ادامه</v-btn>
-        </div>
         <div v-else-if="step === 4">
           <!-- Step 4: انتخاب آدرس -->
           <p>انتخاب آدرس:</p>
@@ -131,10 +123,6 @@ const closeModal = () => {
       </div>
 
       <!-- end content -->
-
-      <!-- <v-card-actions>
-        <v-btn block>Click me</v-btn>
-      </v-card-actions> -->
     </v-card>
   </v-dialog>
 </template>
@@ -150,10 +138,6 @@ const closeModal = () => {
   }
   &__steps {
     padding: 24px;
-    &__input {
-      width: 100%;
-      border-radius: 8px;
-    }
 
     &__submit {
       width: 100%;

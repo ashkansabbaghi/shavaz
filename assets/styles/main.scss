@@ -1,15 +1,25 @@
-@use "font" as *; 
+@use "font" as *;
 
 $bg-main: #fafafa;
 $color-primary: #1f74c9;
 $color-secondary: #d72585;
-$text-primary: #3C3C3C;
+$text-primary: #3c3c3c;
+$text-gray: #6A6A6A;
 
 body {
   font-family: "IRANSansXFaNum", sans-serif;
 }
-h1,h2,h3,h4,h5,h6,p,a,span,label {
- color: $text-primary ;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+span,
+label {
+  color: $text-primary;
 }
 
 .bg-main {
@@ -27,8 +37,10 @@ h1,h2,h3,h4,h5,h6,p,a,span,label {
   line-height: 24px;
   text-align: center;
   padding: 12px 40px;
-  color: #fafafa;
+  color: #fafafa !important;
   border-radius: 4px;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .btn-primary {
@@ -44,6 +56,10 @@ h1,h2,h3,h4,h5,h6,p,a,span,label {
   color: $text-primary;
 }
 
+.text__gray{
+  color: $text-gray;
+}
+
 .v-field {
   direction: rtl;
 }
@@ -52,7 +68,11 @@ h1,h2,h3,h4,h5,h6,p,a,span,label {
   width: 100%;
 }
 
-.align-items-center{
+.align-items-center {
   display: flex;
   align-items: center;
+}
+
+.v-otp-input__content {
+  padding: 0 !important;
 }
