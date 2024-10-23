@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const description = 'black friday' // for seo site 
+const description = 'محصولات رومینا برای مراقبت از پوست و مو با فرمولاسیون پیشرفته.' // for seo site 
 useHead({
   title : 'SHAVAZ',
   link: [

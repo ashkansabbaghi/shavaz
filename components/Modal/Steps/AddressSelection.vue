@@ -16,12 +16,10 @@ const visibleAddresses = computed(() => {
 });
 
 const submit = () => {
-  console.log("submit");
   emits("submit", "accepted");
 };
 
 const newAddress = () => {
-  console.log("newAddress");
   emits("submit", "newAddress");
 };
 </script>

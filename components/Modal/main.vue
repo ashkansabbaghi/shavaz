@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import type { Address , NameSteps } from "~/types";
+import type { Address, NameSteps } from "~/types";
 
 const isOpen = defineModel<boolean>("isOpen");
-const step = ref('phoneNumber');
+const step = ref("phoneNumber");
 const phoneNumber = ref("");
 const otpCode = ref("");
 const selectedAddress = ref(null);
@@ -95,12 +95,10 @@ const addNewAddressInClientSide = () => {
   addresses.push(newAddressCopy);
   localStorage.setItem("addressList", JSON.stringify(addresses));
   setAddressesFromClientSide();
-
 };
 
-
 const resetModal = () => {
-  step.value = '';
+  step.value = "";
   phoneNumber.value = "";
   otpCode.value = "";
   selectedAddress.value = null;
@@ -124,32 +122,21 @@ const goToStep = (nameStep?: string) => {
 
 const controllerFunc = (nameStep: keyof NameSteps) => {
   // send data phone to backend
-  console.log(nameStep);
-
   if (nameStep === "phoneNumber" && phoneNumber.value) {
-    console.log(nameStep, phoneNumber.value);
     goToStep("orderNotPlaced");
   } else if (nameStep === "orderNotPlaced") {
-    console.log(nameStep);
     goToStep("otpCode");
   } else if (nameStep === "otpCode" && otpCode.value) {
-    console.log(nameStep, otpCode.value);
     goToStep("selectAddress");
   } else if (nameStep === "selectAddress" && selectedAddress.value) {
-    console.log(nameStep, selectedAddress.value);
     goToStep("accepted");
   } else if (nameStep === "newAddress") {
-    console.log(nameStep);
     goToStep("newAddress");
   } else if (nameStep === "accepted") {
-    console.log(nameStep);
-    goToStep('accepted');
+    goToStep("accepted");
   } else if (nameStep === "finished") {
-    console.log(nameStep);
     closeModal();
-
   } else if (nameStep === "addNewAddress") {
-    console.log(nameStep);
     addNewAddressInClientSide();
     goToStep("selectAddress");
   }

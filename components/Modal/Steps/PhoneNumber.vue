@@ -1,33 +1,29 @@
 <script setup lang="ts">
 const emits = defineEmits(["submit"]);
 const phoneNumber = defineModel<string | undefined>("phoneNumber");
-const iconInfo = '<v-icon icon="mdi mdi-information" />';
 const validPhone = ref(false);
 
 const rulesPhoneNumber = {
   required: (value: string) => !!value || `  شماره موبایل الزامی است`,
-  counter:  (value:string) => {
-    const phoneRegex = /^09\d{9}$/
-    if (phoneRegex.test(value)) return true
-    return 'شماره موبایل نادرست است.'
-  }
-}
+  counter: (value: string) => {
+    const phoneRegex = /^09\d{9}$/;
+    if (phoneRegex.test(value)) return true;
+    return "شماره موبایل نادرست است.";
+  },
+};
 
 const submit = () => {
-  console.log("submit");
- validPhone.value && emits("submit");
-}
-
+  validPhone.value && emits("submit");
+};
 </script>
 
 <template>
-  <v-form
-    v-model="validPhone"
-    @submit.prevent="submit"
-  >
+  <v-form v-model="validPhone" @submit.prevent="submit">
     <div class="d-flex justify-space-between align-items-center">
       <div class="steps__one--container">
-        <p class="steps__one--title text__gray">شماره موبایلت رو اینجا وارد کن</p>
+        <p class="steps__one--title text__gray">
+          شماره موبایلت رو اینجا وارد کن
+        </p>
         <v-text-field
           :rules="[rulesPhoneNumber.required, rulesPhoneNumber.counter]"
           variant="outlined"

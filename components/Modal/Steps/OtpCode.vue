@@ -6,12 +6,10 @@ const iconInfo = '<v-icon icon="mdi mdi-information" />';
 const validOTPCode = computed(() => otpCode.value === "33333");
 
 const submit = () => {
-  console.log("submit");
   !validOTPCode.value && emits("submit");
 };
 
 const getOTPCode = () => {
-  console.log("getOTPCode");
   otpCode.value = "";
 };
 </script>

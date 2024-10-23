@@ -17,7 +17,6 @@ const rules = {
 };
 
 const submit = () => {
-  console.log("submit");
   emits("submit", "addNewAddress");
 };
 

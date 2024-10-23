@@ -24,7 +24,7 @@ const scrollToProductSlider = inject<() => void>("scrollToProductSlider"); // pr
     <NuxtImg
       class="banner__bg"
       src="/images/bg-banner.jpg"
-      alt="banner-shavaz"
+      alt="پس‌زمینه تبلیغاتی برای محصولات رومینا"
       loading="lazy"
       height="460"
     />
@@ -60,7 +60,7 @@ const scrollToProductSlider = inject<() => void>("scrollToProductSlider"); // pr
             <NuxtImg
               :src="currentImage"
               :key="currentImage"
-              alt="banner-shavaz"
+              alt="محصولات رومینا"
               loading="lazy"
               height="274"
               class="banner__content__image"
@@ -89,7 +89,7 @@ const scrollToProductSlider = inject<() => void>("scrollToProductSlider"); // pr
         <!-- background -->
         <NuxtImg
           src="/images/product-usr-banner.png"
-          alt="banner-shavaz"
+          alt="محصولات رومینا"
           loading="lazy"
           width="477"
           height="510"

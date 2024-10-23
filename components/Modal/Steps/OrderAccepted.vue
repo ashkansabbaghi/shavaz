@@ -2,7 +2,6 @@
 const emits = defineEmits(["submit"]);
 
 const submit = () => {
-  console.log("submit");
   emits("submit");
 };
 </script>
