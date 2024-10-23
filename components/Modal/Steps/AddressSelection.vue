@@ -10,8 +10,8 @@ const props = defineProps({
 const showAll = ref(false);
 
 const visibleAddresses = computed(() => {
-  const addressReversed= props.addresses.reverse();
-  return showAll.value ? addressReversed : addressReversed.slice(0, 3);
+  // const addressReversed= props.addresses.reverse();
+  return showAll.value ? props.addresses : props.addresses.slice(0, 3);
   
 });
 
@@ -48,8 +48,8 @@ const newAddress = () => {
           class="d-flex flex-column ga-3"
         >
           <v-item
-            v-for="address in visibleAddresses"
-            :key="address.id"
+            v-for="(address , indexAddress) in visibleAddresses"
+            :key="indexAddress"
             v-slot="{ isSelected, selectedClass, toggle }"
           >
             <v-card

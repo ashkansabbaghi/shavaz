@@ -3,6 +3,7 @@ import type { Address } from "~/types";
 const emits = defineEmits(["submit"]);
 
 const newAddress = defineModel<Address>('newAddress');
+const valid = ref(false);
 
 const rules = {
   province: [(v: string) => !!v || "استان را انتخاب کنید"],
@@ -17,13 +18,13 @@ const rules = {
 };
 
 const submit = () => {
-  emits("submit", "addNewAddress");
+ valid.value && emits("submit", "addNewAddress");
 };
 
 </script>
 
 <template>
-  <v-form @submit.prevent="submit">
+  <v-form v-model="valid" @submit.prevent="submit">
     <div class="steps__new__address__container ga-3 mb-6">
       <!-- header steps -->
       <div class="steps__new__address__container--header mt-3">
