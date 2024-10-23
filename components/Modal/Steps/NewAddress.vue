@@ -1,16 +1,8 @@
 <script setup lang="ts">
-import type { IconArrowDown } from "#build/components";
-
+import type { Address } from "~/types";
 const emits = defineEmits(["submit"]);
 
-const newAddress = reactive({
-  province: "",
-  city: "",
-  postalCode: "",
-  buildingNumber: "",
-  unitNumber: "",
-  address: "",
-});
+const newAddress = defineModel<Address>('newAddress');
 
 const rules = {
   province: [(v: string) => !!v || "استان را انتخاب کنید"],
@@ -26,13 +18,9 @@ const rules = {
 
 const submit = () => {
   console.log("submit");
-  emits("submit", "accepted");
-};
-
-const addNewAddress = () => {
-  console.log("newAddress");
   emits("submit", "addNewAddress");
 };
+
 </script>
 
 <template>
@@ -48,6 +36,7 @@ const addNewAddress = () => {
       <div class="d-flex flex-row justify-center ga-3">
         <!-- province -->
         <v-combobox
+        v-if="newAddress"
           :rules="rules.province"
           label=" استان *"
           :items="['البرز', 'تهران', 'قزوین', 'اراک', 'مشهد', 'خوزستان']"
@@ -60,6 +49,7 @@ const addNewAddress = () => {
 
         <!-- city -->
         <v-combobox
+        v-if="newAddress"
           :rules="rules.city"
           label=" شهر *"
           :items="['کرج', 'هشتگرد', 'نظرآباد', 'کردان']"
@@ -71,6 +61,7 @@ const addNewAddress = () => {
       </div>
       <div class="d-flex flex-row justify-center ga-3">
         <v-text-field
+        v-if="newAddress"
           :rules="rules.postalCode"
           class="custom-input"
           label="کد پستی *"
@@ -79,7 +70,9 @@ const addNewAddress = () => {
           hide-details="auto"
 
         ></v-text-field>
+
         <v-text-field
+        v-if="newAddress"
           :rules="rules.buildingNumber"
           class="custom-input"
           label="پلاک *"
@@ -88,7 +81,9 @@ const addNewAddress = () => {
           hide-details="auto"
 
         ></v-text-field>
+
         <v-text-field
+        v-if="newAddress"
           :rules="rules.unitNumber"
           class="custom-input"
           label="واحد"
@@ -99,6 +94,7 @@ const addNewAddress = () => {
         ></v-text-field>
       </div>
       <v-textarea
+      v-if="newAddress"
         :rules="rules.address"
         auto-grow
         label="تکمیل آدرس *"
@@ -109,7 +105,7 @@ const addNewAddress = () => {
       ></v-textarea>
     </div>
 
-    <button class="btn-secondary w-full" type="submit">ثبت سفارش</button>
+    <button class="btn-secondary w-full" type="submit">ثبت آدرس</button>
   </v-form>
 </template>
 

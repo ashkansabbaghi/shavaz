@@ -1,57 +1,29 @@
 <script setup lang="ts">
-import type { IconArrowDown } from "#build/components";
-
+import type { Address } from "~/types";
 const emits = defineEmits(["submit"]);
-const addresses = [
-  {
-    id: 1,
-    address:
-      "بزرگراه باکری جنوب کوی ارم خیابان شهیدمحسن یعقوبی(بهار جنوبی) نبش کوچه شهید اکبر اصغر زاده",
-    receiver: "کیمیا علی محمدی",
+const props = defineProps({
+  addresses: {
+    type: Array as PropType<Address[]>,
+    required: true,
   },
-  {
-    id: 2,
-    address: "خیابان ولیعصر شمالی، بالاتر از میدان ونک، کوچه شایسته، پلاک ۵",
-    receiver: "علی احمدی",
-  },
-  {
-    id: 3,
-    address: "خیابان شریعتی، نرسیده به پل صدر، خیابان معلم، پلاک ۱۱",
-    receiver: "سارا مرادی",
-  },
-  {
-    id: 4,
-    address:
-      "بزرگراه باکری جنوب کوی ارم خیابان شهیدمحسن یعقوبی(بهار جنوبی) نبش کوچه شهید اکبر اصغر زاده",
-    receiver: "کیمیا علی محمدی",
-  },
-  {
-    id: 5,
-    address: "خیابان ولیعصر شمالی، بالاتر از میدان ونک، کوچه شایسته، پلاک ۵",
-    receiver: "علی احمدی",
-  },
-  {
-    id: 6,
-    address: "خیابان شریعتی، نرسیده به پل صدر، خیابان معلم، پلاک ۱۱",
-    receiver: "سارا مرادی",
-  },
-];
-
+});
 const showAll = ref(false);
 
-const visibleAddresses = computed(() =>
-  showAll.value ? addresses : addresses.slice(0, 3)
-);
+const visibleAddresses = computed(() => {
+  const addressReversed= props.addresses.reverse();
+  return showAll.value ? addressReversed : addressReversed.slice(0, 3);
+  
+});
 
 const submit = () => {
   console.log("submit");
-  emits("submit" , 'accepted');
+  emits("submit", "accepted");
 };
 
 const newAddress = () => {
   console.log("newAddress");
-  emits("submit" , 'newAddress');
-}
+  emits("submit", "newAddress");
+};
 </script>
 
 <template>
@@ -62,7 +34,11 @@ const newAddress = () => {
         <h4 class="steps__four__container--header--title">
           آدرس تحویل هدیه‌‌‌‌‌‌‌‌‌‌‌‌ات رو انتخاب کن
         </h4>
-        <button type="button" class="steps__four__container--header--button" @click.prevent="newAddress">
+        <button
+          type="button"
+          class="steps__four__container--header--button"
+          @click.prevent="newAddress"
+        >
           <v-icon icon="mdi-plus-box" size="small"></v-icon>
           آدرس جدید
         </button>
@@ -89,9 +65,9 @@ const newAddress = () => {
                 :color="isSelected ? '#d72585' : '#3c3c3c'"
               />
               <div class="steps__four__container--card--content">
-                <p>{{ address.address }}</p>
+                <p>{{ address?.address }}</p>
                 <p>
-                  <span class="font-bold">گیرنده :</span> {{ address.receiver }}
+                  <span class="font-bold">گیرنده :</span> {{ address?.receiver }}
                 </p>
               </div>
             </v-card>
@@ -103,7 +79,7 @@ const newAddress = () => {
               class="steps__four__container--more"
               @click="showAll = !showAll"
             >
-              مشاهده بیشتر
+              {{ !showAll ? "مشاهده بیشتر" : "بستن" }}
               <v-icon
                 :icon="!showAll ? 'mdi-chevron-down' : 'mdi-chevron-up'"
               ></v-icon>
@@ -113,7 +89,7 @@ const newAddress = () => {
       </div>
     </div>
 
-    <button class="btn-secondary w-full" type="submit">ثبت سفارش</button>
+    <button class="btn-secondary w-full" type="submit">ثبت و ارسال هدیه</button>
   </v-form>
 </template>
 
@@ -143,7 +119,7 @@ const newAddress = () => {
 
       &--button {
         font-size: 16px;
-        font-weight: 800;
+        font-weight: bold !important;
         color: $color-secondary;
       }
     }

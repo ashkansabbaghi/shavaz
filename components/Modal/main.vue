@@ -1,32 +1,116 @@
 <script lang="ts" setup>
+import type { Address , NameSteps } from "~/types";
+
 const isOpen = defineModel<boolean>("isOpen");
-const step = ref(1);
+const step = ref('phoneNumber');
 const phoneNumber = ref("");
 const otpCode = ref("");
 const selectedAddress = ref(null);
-const newAddress = ref("");
 
-//rules
-
-const addresses = ref(["آدرس ۱", "آدرس ۲", "آدرس ۳"]); // get object
 const isLoading = ref(false);
 
-const nextStep = (numStep?: number) => {
-  if (numStep) {
-    step.value = numStep;
-  } else step.value < 6 && step.value++;
+const addresses: Address[] = reactive([
+  {
+    id: 1,
+    province: "تهران",
+    city: "تهران",
+    postalCode: "1234567890",
+    buildingNumber: "11",
+    unitNumber: "2",
+    address:
+      "بزرگراه باکری جنوب کوی ارم خیابان شهیدمحسن یعقوبی(بهار جنوبی) نبش کوچه شهید اکبر اصغر زاده",
+    receiver: "کیمیا علی محمدی",
+  },
+  {
+    id: 2,
+    province: "تهران",
+    city: "تهران",
+    postalCode: "2345678901",
+    buildingNumber: "5",
+    unitNumber: "3",
+    address: "خیابان ولیعصر شمالی، بالاتر از میدان ونک، کوچه شایسته، پلاک ۵",
+    receiver: "علی احمدی",
+  },
+  {
+    id: 3,
+    province: "تهران",
+    city: "تهران",
+    postalCode: "3456789012",
+    buildingNumber: "11",
+    unitNumber: "1",
+    address: "خیابان شریعتی، نرسیده به پل صدر، خیابان معلم، پلاک ۱۱",
+    receiver: "سارا مرادی",
+  },
+  {
+    id: 4,
+    province: "تهران",
+    city: "تهران",
+    postalCode: "2345678901",
+    buildingNumber: "5",
+    unitNumber: "3",
+    address: "خیابان ولیعصر شمالی، بالاتر از میدان ونک، کوچه شایسته، پلاک ۵",
+    receiver: "علی احمدی",
+  },
+  {
+    id: 5,
+    province: "تهران",
+    city: "تهران",
+    postalCode: "3456789012",
+    buildingNumber: "11",
+    unitNumber: "1",
+    address: "خیابان شریعتی، نرسیده به پل صدر، خیابان معلم، پلاک ۱۱",
+    receiver: "سارا مرادی",
+  },
+]);
+
+const newAddress: Address = reactive({
+  // id: 0,
+  province: "",
+  city: "",
+  postalCode: "",
+  buildingNumber: "",
+  unitNumber: "",
+  address: "",
+  receiver: "اشکان صباغی",
+});
+
+const setAddressesFromClientSide = () => {
+  const storedAddresses = JSON.parse(
+    localStorage.getItem("addressList") || "[]"
+  );
+
+  if (storedAddresses.length > 0) {
+    addresses.splice(0, addresses.length, ...storedAddresses);
+  }
 };
 
-const goToNewAddress = () => {
-  step.value = 5;
+onMounted(() => {
+  setAddressesFromClientSide();
+});
+
+const addNewAddressInClientSide = () => {
+  const newAddressCopy = {
+    ...newAddress,
+  };
+  addresses.push(newAddressCopy);
+  localStorage.setItem("addressList", JSON.stringify(addresses));
+  setAddressesFromClientSide();
+
 };
+
 
 const resetModal = () => {
-  step.value = 1;
+  step.value = '';
   phoneNumber.value = "";
   otpCode.value = "";
   selectedAddress.value = null;
-  newAddress.value = "";
+
+  newAddress.province = "";
+  newAddress.city = "";
+  newAddress.postalCode = "";
+  newAddress.buildingNumber = "";
+  newAddress.unitNumber = "";
+  newAddress.address = "";
 };
 
 const closeModal = () => {
@@ -34,40 +118,40 @@ const closeModal = () => {
   resetModal();
 };
 
-type NameSteps = {
-  phoneNumber: string;
-  orderNotPlaced: string;
-  otpCode: string;
-  selectAddress: string;
-  newAddress: string;
-  accepted: string;
-  finished: string;
+const goToStep = (nameStep?: string) => {
+  nameStep && (step.value = nameStep);
 };
+
 const controllerFunc = (nameStep: keyof NameSteps) => {
   // send data phone to backend
   console.log(nameStep);
 
   if (nameStep === "phoneNumber" && phoneNumber.value) {
     console.log(nameStep, phoneNumber.value);
-    nextStep();
+    goToStep("orderNotPlaced");
   } else if (nameStep === "orderNotPlaced") {
     console.log(nameStep);
-    nextStep();
+    goToStep("otpCode");
   } else if (nameStep === "otpCode" && otpCode.value) {
     console.log(nameStep, otpCode.value);
-    nextStep();
+    goToStep("selectAddress");
   } else if (nameStep === "selectAddress" && selectedAddress.value) {
     console.log(nameStep, selectedAddress.value);
-    nextStep();
+    goToStep("accepted");
   } else if (nameStep === "newAddress") {
-    console.log(nameStep, newAddress.value);
-    nextStep(5);
+    console.log(nameStep);
+    goToStep("newAddress");
   } else if (nameStep === "accepted") {
     console.log(nameStep);
-    nextStep(6);
+    goToStep('accepted');
   } else if (nameStep === "finished") {
     console.log(nameStep);
     closeModal();
+
+  } else if (nameStep === "addNewAddress") {
+    console.log(nameStep);
+    addNewAddressInClientSide();
+    goToStep("selectAddress");
   }
 };
 </script>
@@ -99,7 +183,7 @@ const controllerFunc = (nameStep: keyof NameSteps) => {
       <!-- steps -->
       <div class="modal__steps">
         <!-- PhoneNumber.vue -->
-        <template v-if="step === 1">
+        <template v-if="step === 'phoneNumber'">
           <modal-steps-phone-number
             v-model:phone-number="phoneNumber"
             @submit="controllerFunc('phoneNumber')"
@@ -107,32 +191,36 @@ const controllerFunc = (nameStep: keyof NameSteps) => {
         </template>
 
         <!-- OrderNotPlaced.vue -->
-        <template v-else-if="step === 2">
+        <template v-else-if="step === 'orderNotPlaced'">
           <modal-steps-order-not-placed
             @submit="controllerFunc('orderNotPlaced')"
           />
         </template>
 
         <!-- OTPCode.vue -->
-        <template v-else-if="step === 3">
+        <template v-else-if="step === 'otpCode'">
           <modal-steps-otp-code
             v-model:otp-code="otpCode"
             @submit="controllerFunc('otpCode')"
           />
         </template>
-
-        <template v-else-if="step === 4">
-          <modal-steps-address-selection @submit="controllerFunc" />
-        </template>
-
-        <template v-else-if="step === 5">
-          <modal-steps-new-address @submit="controllerFunc" />
-
-        </template>
-        <template v-else-if="step === 6">
-          <modal-steps-order-accepted
-            @submit="controllerFunc('finished')"
+        <!-- AddressSelection.vue -->
+        <template v-else-if="step === 'selectAddress'">
+          <modal-steps-address-selection
+            @submit="controllerFunc"
+            :addresses="addresses"
           />
+        </template>
+        <!-- NewAddress.vue -->
+        <template v-else-if="step === 'newAddress'">
+          <modal-steps-new-address
+            @submit="controllerFunc"
+            v-model:new-address="newAddress"
+          />
+        </template>
+        <template v-else-if="step === 'accepted'">
+          <!-- OrderAccepted.vue -->
+          <modal-steps-order-accepted @submit="controllerFunc('finished')" />
         </template>
       </div>
 
